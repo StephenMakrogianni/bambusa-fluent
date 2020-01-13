@@ -23,23 +23,4 @@ class BlocksPageFluentExtension extends Extension
             $query = '"' . $table . '_Localised_' . $locale->getLocale() . '"."' . $field . '"';
         }
     }
-
-    public function onBeforeWrite()
-    {
-        parent::onBeforeWrite();
-
-        if (!$this->isDraftedInLocale() && $this->isInDB()) {
-            // Duplicate main area
-            $area = $this->ElementalArea();
-            $areaNew = $area->duplicate();
-            $this->ElementalAreaID = $areaNew->ID;
-
-            // Duplicate header area
-            $area = $this->HeaderElements();
-            $areaNew = $area->duplicate();
-            $this->HeaderElementsID = $areaNew->ID;
-        }
-
-        return;
-    }
 }
